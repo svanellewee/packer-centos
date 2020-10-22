@@ -67,14 +67,14 @@
 	 "only": ["virtualbox-iso"],
 	 "type": "shell",
          "execute_command": "echo vagrant | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-         "script": "scripts/update-guest",
+         "script": "stage1-scripts/update-guest",
 	 "expect_disconnect": true
        },
        {
 	 "only": ["virtualbox-iso"],
 	 "type": "shell",
          "execute_command": "echo vagrant | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-         "script": "scripts/setup-vagrant"
+         "script": "stage1-scripts/setup-vagrant"
        }
     ],
     "post-processors": [
