@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+yum -y remove docker \
+           docker-client \
+           docker-client-latest \
+           docker-common \
+           docker-latest \
+           docker-latest-logrotate \
+           docker-logrotate \
+           docker-engine
+yum -y install yum-utils
+
+yum-config-manager -y \
+     --add-repo \
+     https://download.docker.com/linux/centos/docker-ce.repo
+yum -y install docker-ce docker-ce-cli containerd.io
+systemctl enable docker
+systemctl restart docker
+usermod -aG docker vagrant
