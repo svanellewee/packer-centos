@@ -1,6 +1,6 @@
 {
     "variables": {
-        "iso_url": "/home/stephan/Downloads/CentOS-8.2.2004-x86_64-minimal.iso", 
+	"iso_url": "http://www.ftp.saix.net/linux/distributions/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-minimal.iso",
         "iso_checksum_url": "sha1:0694507154912ca7c16e6e1768ce400ccda50f62",
         "ssh_timeout": "6m",
         "country": "US",
@@ -81,6 +81,10 @@
         {
             "type": "vagrant",
             "output": "output/packer_centos_{{ .Provider }}-{{isotime \"2006.01\"}}.01.box"
-        }
+        },
+	{
+	    "type": "manifest",
+	    "output": "output/stage-1-manifest.json"
+	}
     ]
 }

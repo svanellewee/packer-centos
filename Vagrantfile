@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |main|
-  main.vm.box = "centos-custom"
+  main.vm.box = "centos-kubernetes"
   main.ssh.private_key_path = "./insecure_keys/id_vagrant"
   main.vm.synced_folder ".", "/home/vagrant/shared"
   main.vm.box_check_update = false
@@ -20,8 +20,8 @@ Vagrant.configure("2") do |main|
        # Customize the amount of memory on the VM:
        vb.memory = "4048"
      end
-     base.vm.provision "shell", path: "./vagrant-scripts/setup-docker"
-     base.vm.provision "shell", path: "./vagrant-scripts/setup-k8s"
+     #base.vm.provision "shell", path: "./vagrant-scripts/setup-docker"
+     #base.vm.provision "shell", path: "./vagrant-scripts/setup-k8s"
   end
 
 end
