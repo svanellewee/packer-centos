@@ -5,23 +5,30 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+
 Vagrant.configure("2") do |main|
   main.vm.box = "centos-kubernetes"
   main.ssh.private_key_path = "./insecure_keys/id_vagrant"
   main.vm.synced_folder ".", "/home/vagrant/shared"
   main.vm.box_check_update = false
 
-  main.vm.define "base" do |base|
-     base.vm.network "private_network", ip: "192.168.33.10"
-     base.vm.provider "virtualbox" do |vb|
-       # Display the VirtualBox GUI when booting the machine
+  
+  main.vm.define "controller" do |controller|
+     controller.vm.network "private_network", ip: "192.168.30.10"
+     controller.vm.provider "virtualbox" do |vb|
        #vb.gui = true
-       #
-       # Customize the amount of memory on the VM:
-       vb.memory = "4048"
+       vb.cpus = 2
+       vb.memory = "2048"
      end
-     #base.vm.provision "shell", path: "./vagrant-scripts/setup-docker"
-     #base.vm.provision "shell", path: "./vagrant-scripts/setup-k8s"
+     #controller.vm.provision "shell", path: "./vagrant-scripts/setup-docker"
+     #controller.vm.provision "shell", path: "./vagrant-scripts/setup-k8s"
   end
 
+  main.vm.define "worker" do |worker|
+     worker.vm.network "private_network", ip: "192.168.40.10"
+     worker.vm.provider "virtualbox" do |vb|
+        vb.cpus = 1
+        vb.memory = "1024"
+     end
+  end
 end
