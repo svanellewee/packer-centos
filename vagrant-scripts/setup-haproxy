@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+sudo apt install haproxy -y
+cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg
+defaults
+  timeout client 30s
+  timeout server 30s
+  timeout connect 30s
+
+frontend control-plane
+   mode tcp
+   bind 192.168.2.10:6443
+   default_backend cluster-nodes
+
+
+backend cluster-nodes
+   mode tcp
+   balance roundrobin
+   server node0 192.168.2.20:6443 check
+   server node1 192.168.2.21:6443 check
+   server node2 192.168.2.22:6443 check
+EOF
+sudo systemctl restart haproxy
+# cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg 
+# frontend kubernetes
+#     bind 192.168.2.10:6443
+#     option tcplog
+#     mode tcp
+#     default_backend kubernetes-master-nodes
+# 
+# backend kubernetes-master-nodes
+#     mode tcp
+#     balance roundrobin
+#     option tcp-check
+#     server master-1 192.168.2.20:6443 check fall 3 rise 2
+#     server master-2 192.168.2.21:6443 check fall 3 rise 2
+#     server master-3 192.168.2.22:6443 check fall 3 rise 2
+# EOF
+# 
