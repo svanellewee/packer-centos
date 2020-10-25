@@ -36,6 +36,8 @@ Vagrant.configure("2") do |main|
         vb.cpus = 1
         vb.memory = 512
      end
+     loadbalancer.vm.provision "shell", path: "./vagrant-scripts/setup-hosts"
+     loadbalancer.vm.provision "shell", path: "./vagrant-scripts/setup-haproxy"
    end
  end
 
