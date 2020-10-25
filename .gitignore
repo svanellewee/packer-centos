@@ -5,3 +5,4 @@ packer_cache
 ./output
 insecure_keys/id_vagrant*
 *swp
+cache
