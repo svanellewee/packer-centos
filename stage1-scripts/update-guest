@@ -5,7 +5,7 @@ echo "Starting Provision"
 # https://www.tecmint.com/install-virtualbox-guest-additions-in-centos-rhel-fedora/
 yum -y install epel-release
 yum -y update
-yum -y install make gcc kernel-headers kernel-devel perl dkms bzip2 tar
+yum -y install bash-completion make gcc kernel-headers kernel-devel perl dkms bzip2 tar
 /usr/bin/install --directory --owner=vagrant --group=vagrant --mode=0700 /home/vagrant/.ssh
 #cp ./insecure_keys/id_vagrant.pub /home/vagrant/.ssh/authorized_keys
 /usr/bin/curl "http://${PACKER_HTTP_ADDR}/id_vagrant.pub" --output /home/vagrant/.ssh/authorized_keys
